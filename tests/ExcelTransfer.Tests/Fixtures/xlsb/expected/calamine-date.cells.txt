@@ -1,0 +1,6 @@
+Sheet1!A1	n	44197
+Sheet1!B1	n	15
+Sheet1!A2	n	44198
+Sheet1!B2	n	16
+Sheet1!A3	n	10.6320601851852
+Sheet1!B3	n	17

@@ -1,0 +1,189 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="ExcelTransfer.App.MainWindow"
+        Title="Excel Period Transfer"
+        Width="1120" Height="780" MinWidth="900" MinHeight="620"
+        WindowStartupLocation="CenterScreen">
+  <DockPanel>
+
+    <Border DockPanel.Dock="Top" Padding="20,14" Background="#14808080">
+      <StackPanel>
+        <TextBlock Text="Excel Period Transfer" FontSize="22" FontWeight="SemiBold" />
+        <TextBlock x:Name="StepIndicator" Margin="0,4,0,0" Opacity="0.8" TextWrapping="Wrap" />
+      </StackPanel>
+    </Border>
+
+    <Border DockPanel.Dock="Bottom" Padding="20,12" BorderThickness="0,1,0,0" BorderBrush="#33808080">
+      <Grid ColumnDefinitions="*,Auto,Auto">
+        <TextBlock x:Name="StatusText" VerticalAlignment="Center" TextWrapping="Wrap" Margin="0,0,16,0" />
+        <Button x:Name="BackButton" Grid.Column="1" Content="Back" MinWidth="100" Margin="0,0,8,0" />
+        <Button x:Name="NextButton" Grid.Column="2" Content="Next" MinWidth="120" />
+      </Grid>
+    </Border>
+
+    <TabControl x:Name="Steps" Padding="20,12,20,8">
+
+      <TabItem Header="1  Files">
+        <ScrollViewer>
+          <StackPanel Spacing="10" MaxWidth="980" HorizontalAlignment="Left">
+            <TextBlock Classes="h2" Text="Select the workbooks" />
+            <TextBlock Classes="hint" Text="Supported formats: .xlsx, .xlsm and .xlsb. The source and destination files are never modified; the result is saved as a new workbook in the destination's format. All processing happens on this computer." />
+            <Grid ColumnDefinitions="170,*,Auto" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto" Margin="0,8,0,0">
+              <TextBlock Classes="label" Grid.Row="0" Text="Source workbook" />
+              <TextBox x:Name="SourcePathBox" Grid.Row="0" Grid.Column="1" PlaceholderText="Workbook that contains the new period values" />
+              <Button x:Name="BrowseSourceButton" Grid.Row="0" Grid.Column="2" Content="Browse..." Margin="8,0,0,0" />
+              <TextBlock x:Name="SourceFileInfo" Classes="hint" Grid.Row="1" Grid.Column="1" Margin="0,2,0,10" />
+
+              <TextBlock Classes="label" Grid.Row="2" Text="Destination workbook" />
+              <TextBox x:Name="DestinationPathBox" Grid.Row="2" Grid.Column="1" PlaceholderText="Workbook whose table receives the values" />
+              <Button x:Name="BrowseDestinationButton" Grid.Row="2" Grid.Column="2" Content="Browse..." Margin="8,0,0,0" />
+              <TextBlock x:Name="DestinationFileInfo" Classes="hint" Grid.Row="3" Grid.Column="1" Margin="0,2,0,10" />
+
+              <TextBlock Classes="label" Grid.Row="4" Text="Save result as" />
+              <TextBox x:Name="OutputPathBox" Grid.Row="4" Grid.Column="1" PlaceholderText="Leave empty to use '&lt;destination&gt; - updated'" />
+              <Button x:Name="BrowseOutputButton" Grid.Row="4" Grid.Column="2" Content="Browse..." Margin="8,0,0,0" />
+              <TextBlock x:Name="OutputInfo" Classes="hint" Grid.Row="5" Grid.Column="1" Margin="0,2,0,4" />
+              <CheckBox x:Name="OverwriteOutputBox" Grid.Row="6" Grid.Column="1" Content="Replace the output file if it already exists" />
+            </Grid>
+          </StackPanel>
+        </ScrollViewer>
+      </TabItem>
+
+      <TabItem Header="2  Source data">
+        <Grid RowDefinitions="Auto,Auto,Auto,Auto,*">
+          <TextBlock Classes="h2" Text="Source data" />
+          <TextBlock Classes="hint" Grid.Row="1" Text="Choose the worksheet and, if available, the Excel Table that holds the period values. Without a table, point at the header row and the data rows." />
+          <WrapPanel Grid.Row="2" Margin="0,10,0,0">
+            <StackPanel Margin="0,0,16,8">
+              <TextBlock Text="Worksheet" />
+              <ComboBox x:Name="SourceSheetBox" MinWidth="220" />
+            </StackPanel>
+            <StackPanel Margin="0,0,16,8">
+              <TextBlock Text="Table" />
+              <ComboBox x:Name="SourceTableBox" MinWidth="220" />
+            </StackPanel>
+            <StackPanel Margin="0,0,12,8">
+              <TextBlock Text="Header row" />
+              <NumericUpDown x:Name="SourceHeaderRowBox" Minimum="1" Maximum="1048576" Increment="1" FormatString="0" Width="130" />
+            </StackPanel>
+            <StackPanel Margin="0,0,12,8">
+              <TextBlock Text="First data row" />
+              <NumericUpDown x:Name="SourceFirstRowBox" Minimum="1" Maximum="1048576" Increment="1" FormatString="0" Width="130" />
+            </StackPanel>
+            <StackPanel Margin="0,0,16,8">
+              <TextBlock Text="Last data row" />
+              <NumericUpDown x:Name="SourceLastRowBox" Minimum="1" Maximum="1048576" Increment="1" FormatString="0" Width="130" />
+            </StackPanel>
+            <CheckBox x:Name="SourceIncludeHiddenBox" Content="Include hidden and filtered rows" IsChecked="True" VerticalAlignment="Bottom" Margin="0,0,0,8" />
+          </WrapPanel>
+          <TextBlock x:Name="SourceDataInfo" Classes="hint" Grid.Row="3" Margin="0,4,0,8" />
+          <ScrollViewer Grid.Row="4" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+            <Grid x:Name="SourcePreviewGrid" HorizontalAlignment="Left" VerticalAlignment="Top" />
+          </ScrollViewer>
+        </Grid>
+      </TabItem>
+
+      <TabItem Header="3  Destination data">
+        <Grid RowDefinitions="Auto,Auto,Auto,Auto,*">
+          <TextBlock Classes="h2" Text="Destination data" />
+          <TextBlock Classes="hint" Grid.Row="1" Text="Choose the worksheet and the Excel Table (or header row and data rows) whose period columns will be refreshed. Only the data rows of this selection are changed." />
+          <WrapPanel Grid.Row="2" Margin="0,10,0,0">
+            <StackPanel Margin="0,0,16,8">
+              <TextBlock Text="Worksheet" />
+              <ComboBox x:Name="DestinationSheetBox" MinWidth="220" />
+            </StackPanel>
+            <StackPanel Margin="0,0,16,8">
+              <TextBlock Text="Table" />
+              <ComboBox x:Name="DestinationTableBox" MinWidth="220" />
+            </StackPanel>
+            <StackPanel Margin="0,0,12,8">
+              <TextBlock Text="Header row" />
+              <NumericUpDown x:Name="DestinationHeaderRowBox" Minimum="1" Maximum="1048576" Increment="1" FormatString="0" Width="130" />
+            </StackPanel>
+            <StackPanel Margin="0,0,12,8">
+              <TextBlock Text="First data row" />
+              <NumericUpDown x:Name="DestinationFirstRowBox" Minimum="1" Maximum="1048576" Increment="1" FormatString="0" Width="130" />
+            </StackPanel>
+            <StackPanel Margin="0,0,16,8">
+              <TextBlock Text="Last data row" />
+              <NumericUpDown x:Name="DestinationLastRowBox" Minimum="1" Maximum="1048576" Increment="1" FormatString="0" Width="130" />
+            </StackPanel>
+            <CheckBox x:Name="DestinationIncludeHiddenBox" Content="Include hidden and filtered rows" IsChecked="True" VerticalAlignment="Bottom" Margin="0,0,0,8" />
+          </WrapPanel>
+          <TextBlock x:Name="DestinationDataInfo" Classes="hint" Grid.Row="3" Margin="0,4,0,8" />
+          <ScrollViewer Grid.Row="4" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+            <Grid x:Name="DestinationPreviewGrid" HorizontalAlignment="Left" VerticalAlignment="Top" />
+          </ScrollViewer>
+        </Grid>
+      </TabItem>
+
+      <TabItem Header="4  Match keys">
+        <ScrollViewer>
+          <StackPanel Spacing="10" MaxWidth="980" HorizontalAlignment="Left">
+            <TextBlock Classes="h2" Text="Match records by key" />
+            <TextBlock Classes="hint" Text="Pick the column pair(s) that identify the same record in both workbooks, for example ProductCode and Region. Records are matched by these values, never by row position. Columns are shown as 'header (letter)' so duplicate or blank headers stay distinguishable." />
+            <StackPanel x:Name="KeyRows" Spacing="6" />
+            <Button x:Name="AddKeyButton" Content="Add another key column pair" HorizontalAlignment="Left" />
+            <Expander Header="Matching rules applied to key values" Margin="0,8,0,0">
+              <ItemsControl x:Name="RulesList" Margin="8" />
+            </Expander>
+          </StackPanel>
+        </ScrollViewer>
+      </TabItem>
+
+      <TabItem Header="5  Period columns">
+        <ScrollViewer>
+          <StackPanel Spacing="10" MaxWidth="980" HorizontalAlignment="Left">
+            <TextBlock Classes="h2" Text="Period columns to transfer" />
+            <TextBlock Classes="hint" Text="Map each source period column to the destination column it should fill, for example '2026 Q1' to 'Q1 Actual'. Every mapped destination column is cleared for all data rows and then filled from matching records; unmapped columns are left untouched. Key columns cannot be chosen as destinations." />
+            <StackPanel x:Name="PeriodRows" Spacing="6" />
+            <Button x:Name="AddPeriodButton" Content="Add another period column pair" HorizontalAlignment="Left" />
+          </StackPanel>
+        </ScrollViewer>
+      </TabItem>
+
+      <TabItem Header="6  Validate &amp; preview">
+        <Grid RowDefinitions="Auto,Auto,*,Auto">
+          <TextBlock Classes="h2" Text="Validate and preview" />
+          <StackPanel Grid.Row="1" Orientation="Horizontal" Spacing="12" Margin="0,4,0,10">
+            <Button x:Name="ValidateButton" Content="Run validation" MinWidth="140" />
+            <ProgressBar x:Name="ValidateProgress" Width="220" Minimum="0" Maximum="100" IsVisible="False" VerticalAlignment="Center" />
+            <TextBlock x:Name="ValidateStage" VerticalAlignment="Center" Classes="hint" />
+          </StackPanel>
+          <ScrollViewer Grid.Row="2">
+            <StackPanel x:Name="PreviewPanel" MaxWidth="1040" HorizontalAlignment="Left" />
+          </ScrollViewer>
+          <StackPanel Grid.Row="3" Spacing="6" Margin="0,10,0,0">
+            <CheckBox x:Name="AllowMissingKeysBox" Content="Skip records whose key values are missing instead of blocking the transfer (they are reported)" />
+            <CheckBox x:Name="ConfirmBox" Content="I have reviewed the preview and want to run this transfer" IsEnabled="False" />
+          </StackPanel>
+        </Grid>
+      </TabItem>
+
+      <TabItem Header="7  Transfer">
+        <ScrollViewer>
+          <StackPanel Spacing="12" MaxWidth="980" HorizontalAlignment="Left">
+            <TextBlock Classes="h2" Text="Transfer" />
+            <StackPanel Orientation="Horizontal" Spacing="12">
+              <ProgressBar x:Name="TransferProgress" Width="320" Minimum="0" Maximum="100" VerticalAlignment="Center" />
+              <TextBlock x:Name="TransferStage" VerticalAlignment="Center" />
+            </StackPanel>
+            <Border x:Name="ResultCard" Classes="card" IsVisible="False">
+              <StackPanel Spacing="6">
+                <TextBlock x:Name="ResultTitle" FontSize="16" FontWeight="SemiBold" />
+                <TextBlock x:Name="ResultDetails" TextWrapping="Wrap" />
+                <ItemsControl x:Name="ResultNotes" />
+                <StackPanel Orientation="Horizontal" Spacing="8" Margin="0,8,0,0">
+                  <Button x:Name="OpenFolderButton" Content="Show output in folder" />
+                  <Button x:Name="RestartButton" Content="Start another transfer" />
+                </StackPanel>
+              </StackPanel>
+            </Border>
+            <TextBlock x:Name="TransferError" TextWrapping="Wrap" Foreground="#C62828" IsVisible="False" />
+          </StackPanel>
+        </ScrollViewer>
+      </TabItem>
+
+    </TabControl>
+  </DockPanel>
+</Window>

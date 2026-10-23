@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <RootNamespace>ExcelTransfer.Core</RootNamespace>
+    <AssemblyName>ExcelTransfer.Core</AssemblyName>
+    <Description>Core engine: reads .xlsx data, matches records by keys and applies period-column transfers with the Open XML SDK.</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DocumentFormat.OpenXml" Version="3.5.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="ExcelTransfer.Tests" />
+  </ItemGroup>
+
+</Project>

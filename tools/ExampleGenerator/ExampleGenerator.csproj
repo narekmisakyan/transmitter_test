@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>ExampleGenerator</RootNamespace>
+    <Description>Generates the example workbooks in /examples and runs the example transfer.</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ClosedXML" Version="0.105.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\ExcelTransfer.Core\ExcelTransfer.Core.csproj" />
+  </ItemGroup>
+
+</Project>

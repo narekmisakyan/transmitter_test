@@ -1,0 +1,12 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/ExcelTransfer.App/ExcelTransfer.App.csproj" />
+    <Project Path="src/ExcelTransfer.Core/ExcelTransfer.Core.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/ExcelTransfer.Tests/ExcelTransfer.Tests.csproj" />
+  </Folder>
+  <Folder Name="/tools/">
+    <Project Path="tools/ExampleGenerator/ExampleGenerator.csproj" />
+  </Folder>
+</Solution>
