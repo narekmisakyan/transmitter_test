@@ -1,0 +1,48 @@
+mySheet1!A1	s	String
+mySheet1!B1	s	This is a string
+mySheet1!A2	s	integer
+mySheet1!B2	n	13
+mySheet1!A3	s	float
+mySheet1!B3	n	13.1211231321
+mySheet1!A4	s	currency
+mySheet1!B4	n	3.03
+mySheet1!A5	s	percent
+mySheet1!B5	n	0.2
+mySheet1!A6	s	float 2
+mySheet1!B6	n	13.12131231
+mySheet1!A7	s	long int
+mySheet1!B7	n	123456789012345
+mySheet1!A8	s	longer int
+mySheet1!B8	n	1234567890123450
+mySheet1!A9	s	fraction
+mySheet1!B9	n	0.25
+mySheet1!A10	s	date
+mySheet1!B10	n	42803
+mySheet1!A11	s	comment
+mySheet1!B11	s	contents
+mySheet1!A12	s	hyperlink
+mySheet1!B12	s	tika_link
+mySheet1!A13	s	formula
+mySheet1!B13	n	4
+mySheet1!C13	n	2
+mySheet1!A14	s	formulaErr
+mySheet1!B14	e	#NAME?
+mySheet1!A15	s	formulaFloat
+mySheet1!B15	n	0.5
+mySheet1!D15	s	March
+mySheet1!E15	s	April
+mySheet1!A16	s	customFormat1
+mySheet1!B16	s	   46/1963
+mySheet1!C16	s	merchant1
+mySheet1!D16	n	1
+mySheet1!E16	n	3
+mySheet1!A17	s	customFormat2
+mySheet1!B17	s	  3/128
+mySheet1!C17	s	merchant2
+mySheet1!D17	n	2
+mySheet1!E17	n	4
+mySheet1!C21	s	text test
+mySheet1!B30	s	the
+mySheet1!B33	s	the
+mySheet1!D33	s	quick
+mySheet1!B35	s	comment6

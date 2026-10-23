@@ -1,0 +1,26 @@
+datatypes!A1	n	1
+datatypes!A2	n	1.5
+datatypes!A3	s	ab
+datatypes!A4	b	FALSE
+datatypes!A5	s	test
+datatypes!A6	n	42663
+issue2!A1	n	1
+issue2!B1	s	a
+issue2!A2	n	2
+issue2!B2	s	b
+issue2!A3	n	3
+issue2!B3	s	c
+Sheet1!A2	n	0
+issue5!A1	n	0.5
+issue6!A1	n	1
+issue6!A2	n	2
+issue6!A3	s	ab
+issue6!A4	b	FALSE
+spc_chrs!A1	s	&
+spc_chrs!A2	s	<
+spc_chrs!A3	s	>
+spc_chrs!A4	s	aaa ' aaa
+spc_chrs!A5	s	"
+spc_chrs!A6	s	☺
+spc_chrs!A7	s	֍
+spc_chrs!A8	s	àâéêèçöïî«»

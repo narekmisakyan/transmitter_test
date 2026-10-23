@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+    <RootNamespace>ExcelTransfer.Tests</RootNamespace>
+    <!-- xUnit analyzer style hints (cancellation-token plumbing, Assert.Single overloads) are not relevant to these tests. -->
+    <NoWarn>$(NoWarn);xUnit1051;xUnit2031</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.11.0" />
+    <PackageReference Include="xunit.v3" Version="3.2.2" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="3.1.5" />
+    <!-- ClosedXML is used only to build test fixtures quickly; the product itself does not depend on it. -->
+    <PackageReference Include="ClosedXML" Version="0.105.1" />
+    <PackageReference Include="Avalonia.Headless.XUnit" Version="12.1.4" />
+    <PackageReference Include="Avalonia.Skia" Version="12.1.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\ExcelTransfer.Core\ExcelTransfer.Core.csproj" />
+    <ProjectReference Include="..\..\src\ExcelTransfer.App\ExcelTransfer.App.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="Xunit" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Fixtures\**" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+</Project>
